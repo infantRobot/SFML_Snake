@@ -6,7 +6,7 @@
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(800, 600+20), "SFML works!");
 	Snake player;
 
 	window.setFramerateLimit(60);
