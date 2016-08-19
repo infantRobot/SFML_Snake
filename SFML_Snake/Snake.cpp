@@ -50,27 +50,29 @@ void Snake::update(sf::Time dt)
 {
 	deltaT += dt.asSeconds();
 	//std::cout << deltaT << std::endl;
-
-	sf::Vector2i newPos = sf::Vector2i(xSpeed + snakePos.front().x, ySpeed + snakePos.front().y);
-	if (newPos.x < 0 || newPos.x > SIZE-1 || newPos.y < 0 || newPos.y > SIZE-1)
+	if (deltaT > FRAMERATE)
 	{
-		isAlive = false;
-	}
-	if (deltaT > FRAMERATE && isAlive)
-	{
-		if (newPos == foodPos) 
+		sf::Vector2i newPos = sf::Vector2i(xSpeed + snakePos.front().x, ySpeed + snakePos.front().y);
+		if (newPos.x < 0 || newPos.x > SIZE - 1 || newPos.y < 0 || newPos.y > SIZE - 1)
 		{
-			snakeSize++;
+			isAlive = false;
+		}
+		if (isAlive)
+		{
+			if (newPos == foodPos)
+			{
+				snakeSize++;
 
-			snakePos.push_front(newPos);
-			createFood();
+				snakePos.push_front(newPos);
+				createFood();
+			}
+			else
+			{
+				snakePos.push_front(newPos);
+				snakePos.pop_back();
+			}
+			deltaT = 0;
 		}
-		else
-		{
-			snakePos.push_front(newPos);
-			snakePos.pop_back();
-		}
-		deltaT = 0;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
 	{
