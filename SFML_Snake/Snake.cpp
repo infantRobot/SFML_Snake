@@ -57,6 +57,13 @@ void Snake::update(sf::Time dt)
 		{
 			isAlive = false;
 		}
+		for (std::list<sf::Vector2i>::iterator it = snakePos.begin(); it != snakePos.end(); it++)
+		{
+			if (newPos == (*it))
+			{
+				isAlive = false;
+			}
+		}
 		if (isAlive)
 		{
 			if (newPos == foodPos)
